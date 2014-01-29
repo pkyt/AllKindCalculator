@@ -159,8 +159,8 @@
 }
 
 - (IBAction)buttonPressed:(UIButton *)sender {
-    NSString *cr = [sender currentTitle];
-    char c = [cr characterAtIndex:0];
+    NSString *senderName = [sender currentTitle];
+    char c = [senderName characterAtIndex:0];
     BOOL thisMinus = NO;
     if (!userIsInTheMiddleOfEnteringNumber){
         if (c == '-'){
@@ -169,10 +169,10 @@
             [self.brain pushChar:'('];
             [self.brain pushChar:'0'];
         }
-        _label.text = cr;
+        _label.text = senderName;
         userIsInTheMiddleOfEnteringNumber = YES;
     }else{
-        _label.text = [_label.text stringByAppendingString:cr];
+        _label.text = [_label.text stringByAppendingString:senderName];
     }
     if (minusInFront&&(!thisMinus)){
         if ((c == '-')||(c == '+')||(c == '/')||(c == '*')||(c == '(')||(c == ')')){
@@ -193,7 +193,6 @@
         userIsInTheMiddleOfEnteringNumber = NO;
     }
     _label.text = message;
-    //NSLog(message);
 }
 
 - (IBAction)clearPressed:(UIButton*)sender {
