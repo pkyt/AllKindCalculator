@@ -1,5 +1,5 @@
 //
-//  CalculatorMyView.m
+//  CalculatorView.m
 //  AllKindCalculator
 //
 //  Created by Pavlo Kytsmey on 1/30/14.
@@ -8,11 +8,11 @@
 
 #import "CalculatorView.h"
 
-@implementation CalculatorMyView
+@implementation CalculatorView
 
 @synthesize viewsButtons = _viewsButtons;
 @synthesize label = _label;
-@synthesize myFunctions = _myFunctions;
+@synthesize delegate = _delegate;
 
 - (NSMutableArray*)viewsButtons{
     if (!_viewsButtons) {
@@ -64,15 +64,15 @@
 }
 
 - (void)buttonSelector:(UIButton*)sender{
-    [self.myFunctions buttonPressed:sender writeTo:_label];
+    [self.delegate buttonPressed:sender writeTo:_label];
 }
 
 - (void)submitSelector:(UIButton*)sender{
-    [self.myFunctions submitPressed:sender writeTo:_label];
+    [self.delegate submitPressed:sender writeTo:_label];
 }
 
 - (void)clearSelector:(UIButton*)sender{
-    [self.myFunctions clearPressed:sender writeTo:_label];
+    [self.delegate clearPressed:sender writeTo:_label];
 }
 
 - (void)createButtons{

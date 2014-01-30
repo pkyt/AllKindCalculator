@@ -11,8 +11,8 @@
 #import "CalculatorView.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface CalculatorViewController ()<CalculatorMyViewFunctions>
-@property (nonatomic, weak) IBOutlet CalculatorMyView *myView;
+@interface CalculatorViewController ()<CalculatorViewDelegate>
+@property (nonatomic, weak) IBOutlet CalculatorView *myView;
 @property (nonatomic) BOOL userIsInTheMiddleOfEnteringNumber;
 @property (nonatomic, strong) CalculatorBrain *brain;
 @property (nonatomic, strong) NSString *previousOperation;
