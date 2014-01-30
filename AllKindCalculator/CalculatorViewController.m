@@ -8,45 +8,48 @@
 
 #import "CalculatorViewController.h"
 #import "CalculatorBrain.h"
+#import "CalculatorMyView.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface CalculatorViewController ()
-@property (nonatomic, strong) NSMutableArray* arrayOfViewButtons;
-@property (nonatomic) UILabel* label;
-@property (nonatomic) float x;
-@property (nonatomic) float y;
-@property (nonatomic) float width;
-@property (nonatomic) float heigth;
+@interface CalculatorViewController ()<CalculatorMyViewFunctions>
+@property (nonatomic, weak) IBOutlet CalculatorMyView *myView;
+//@property (nonatomic, strong) NSMutableArray* arrayOfViewButtons;
+//@property (nonatomic) UILabel* label;
+//@property (nonatomic) float x;
+//@property (nonatomic) float y;
+//@property (nonatomic) float width;
+//@property (nonatomic) float heigth;
 @property (nonatomic) BOOL userIsInTheMiddleOfEnteringNumber;
 @property (nonatomic, strong) CalculatorBrain *brain;
 @property (nonatomic, strong) NSString *previousOperation;
 @property (nonatomic) int count;
 @property (nonatomic) bool minusInFront;
-@property (nonatomic, strong) NSString* labelMessage;
-@property (nonatomic) NSNotificationCenter*  orientationChanged;
+//@property (nonatomic, strong) NSString* labelMessage;
+//@property (nonatomic) NSNotificationCenter* orientationChanged;
 
-- (void)createLabel;
-- (void)createButtons;
-- (void)removeEverythingFromView;
-- (void)deviceOrientationDidChange:(NSNotification*)sender;
+//- (void)createLabel;
+//- (void)createButtons;
+//- (void)removeEverythingFromView;
+//- (void)deviceOrientationDidChange:(NSNotification*)sender;
 
 @end
 
 
 @implementation CalculatorViewController
-@synthesize label = _label;
-@synthesize arrayOfViewButtons = _arrayOfViewButtons;
-@synthesize x = _x;
-@synthesize y = _y;
-@synthesize width = _width;
-@synthesize heigth = _heigth;
+
+//@synthesize label = _label;
+//@synthesize arrayOfViewButtons = _arrayOfViewButtons;
+//@synthesize x = _x;
+//@synthesize y = _y;
+//@synthesize width = _width;
+//@synthesize heigth = _heigth;
 @synthesize userIsInTheMiddleOfEnteringNumber;
 @synthesize brain = _brain;
 @synthesize previousOperation;
 @synthesize count;
 @synthesize minusInFront;
-@synthesize labelMessage = _labelMessage;
-@synthesize orientationChanged = _orientationChanged;
+//@synthesize labelMessage = _labelMessage;
+//@synthesize orientationChanged = _orientationChanged;
 
 - (CalculatorBrain *)brain{
     if(!_brain) _brain = [CalculatorBrain new];
@@ -54,7 +57,7 @@
 }
 
 
-- (NSMutableArray*)arrayOfViewButtons{
+/*- (NSMutableArray*)arrayOfViewButtons{
     if (!_arrayOfViewButtons){
         _arrayOfViewButtons = [NSMutableArray new];
     }
@@ -72,14 +75,15 @@
     if (_label){
         [_label removeFromSuperview];
     }
-    int countButttoms = [self.arrayOfViewButtons count];
+    NSUInteger countButttoms = [self.arrayOfViewButtons count];
     for (int i = 0; i < countButttoms; i++) {
         UIButton* button = [self.arrayOfViewButtons objectAtIndex:i];
         [button removeFromSuperview];
     }
     [self.arrayOfViewButtons removeAllObjects];
 }
-
+ */
+/*
 - (void)deviceOrientationDidChange:(NSNotification*)sender{
     _labelMessage = _label.text;
     if (!_labelMessage) {
@@ -97,7 +101,8 @@
     [self createLabel];
     [self createButtons];
 }
-
+ */
+/*
 - (void)createButtons{
     #define delta 1
     NSString* nameOfButtons = @"789+456-123*(0)/";
@@ -132,7 +137,7 @@
     [self.view addSubview:button];
     
     // Clear button
-    CGRect buttonRect1 = CGRectMake(_x + 3*_width/8 + delta ,_y + 5*_heigth/6 + delta , 3*_width/8 - 2*delta, _heigth/6-2*delta);
+    CGRect buttonRect1 = CGRectMake(_x + 3*_width/8 + delta,_y + 5*_heigth/6 + delta , 3*_width/8 - 2*delta, _heigth/6-2*delta);
     UIButton* button1 = [[UIButton alloc] initWithFrame:buttonRect1];
     button1.layer.cornerRadius = 10;
     button1.clipsToBounds = YES;
@@ -157,8 +162,9 @@
     [self.arrayOfViewButtons addObject:button2];
     [self.view addSubview:button2];
 }
-
+*/
 - (IBAction)buttonPressed:(UIButton *)sender {
+
     NSString *senderName = [sender currentTitle];
     char c = [senderName characterAtIndex:0];
     BOOL thisMinus = NO;
@@ -169,10 +175,10 @@
             [self.brain pushChar:'('];
             [self.brain pushChar:'0'];
         }
-        _label.text = senderName;
+        _myView.label.text = senderName;
         userIsInTheMiddleOfEnteringNumber = YES;
     }else{
-        _label.text = [_label.text stringByAppendingString:senderName];
+        _myView.label.text = [_myView.label.text stringByAppendingString:senderName];
     }
     if (minusInFront&&(!thisMinus)){
         if ((c == '-')||(c == '+')||(c == '/')||(c == '*')||(c == '(')||(c == ')')){
@@ -192,25 +198,23 @@
     if (![self.brain didWeWriteSthToCCode]){
         userIsInTheMiddleOfEnteringNumber = NO;
     }
-    _label.text = message;
+    _myView.label.text = message;
 }
 
 - (IBAction)clearPressed:(UIButton*)sender {
     [self.brain clearExpr];
-    _label.text = @"0";
+    _myView.label.text = @"0";
     userIsInTheMiddleOfEnteringNumber = NO;
 }
 
 - (void)viewDidLoad
 {
-    if (!_labelMessage) {
-        _labelMessage = @"0";
-    }
     [super viewDidLoad];
-    _width = self.view.bounds.size.height;
-    _heigth = self.view.bounds.size.width - 10;
-    _x = self.view.bounds.origin.y;
-    _y = self.view.bounds.origin.x + 10;
+    self.view = [CalculatorMyView new];
+    /*_width = self.view.bounds.size.width;
+    _heigth = self.view.bounds.size.height - 10;
+    _x = self.view.bounds.origin.x;
+    _y = self.view.bounds.origin.y + 10;
     [self removeEverythingFromView];
     [self createLabel];
     [self createButtons];
@@ -222,6 +226,7 @@
                              object:nil];
     }
     self.view.userInteractionEnabled = YES;
+     */
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation

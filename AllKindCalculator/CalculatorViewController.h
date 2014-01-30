@@ -9,8 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CalculatorViewController : UIViewController
-- (IBAction)buttonPressed:(UIButton*)sender;
-- (IBAction)submitPressed:(UIButton*)sender;
-- (IBAction)clearPressed:(UIButton*)sender;
 
 @end
