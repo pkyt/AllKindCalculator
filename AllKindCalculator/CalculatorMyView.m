@@ -21,9 +21,24 @@
     return _viewsButtons;
 }
 
+- (UILabel*)getLabel{
+    return _label;
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
+    if (self) {
+        NSLog(@"at least got here");
+        [self setBackgroundColor:[UIColor whiteColor]];
+        [self createLabel];
+        [self createButtons];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
     if (self) {
         NSLog(@"at least got here");
         [self setBackgroundColor:[UIColor whiteColor]];
@@ -48,16 +63,16 @@
     return button;
 }
 
-- (IBAction)buttonSelector:(UIButton*)sender{
-    [self.myFunctions buttonPressed:sender];
+- (void)buttonSelector:(UIButton*)sender{
+    [self.myFunctions buttonPressed:sender writeTo:_label];
 }
 
-- (IBAction)submitSelector:(UIButton*)sender{
-    [self.myFunctions submitPressed:sender];
+- (void)submitSelector:(UIButton*)sender{
+    [self.myFunctions submitPressed:sender writeTo:_label];
 }
 
-- (IBAction)clearSelector:(UIButton*)sender{
-    [self.myFunctions clearPressed:sender];
+- (void)clearSelector:(UIButton*)sender{
+    [self.myFunctions clearPressed:sender writeTo:_label];
 }
 
 - (void)createButtons{
