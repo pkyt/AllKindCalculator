@@ -29,7 +29,6 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        NSLog(@"at least got here");
         [self setBackgroundColor:[UIColor whiteColor]];
         [self createLabel];
         [self createButtons];
@@ -40,7 +39,6 @@
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
     if (self) {
-        NSLog(@"at least got here");
         [self setBackgroundColor:[UIColor whiteColor]];
         [self createLabel];
         [self createButtons];
@@ -63,15 +61,15 @@
     return button;
 }
 
-- (void)buttonSelector:(UIButton*)sender{
+- (void)callButtonPressed:(UIButton*)sender{
     [self.delegate buttonPressed:sender writeTo:_label];
 }
 
-- (void)submitSelector:(UIButton*)sender{
+- (void)callSubmitPressed:(UIButton*)sender{
     [self.delegate submitPressed:sender writeTo:_label];
 }
 
-- (void)clearSelector:(UIButton*)sender{
+- (void)callClearPressed:(UIButton*)sender{
     [self.delegate clearPressed:sender writeTo:_label];
 }
 
@@ -81,23 +79,23 @@
         for (int j = 0; j < 4; j++) {
             NSString* nameNotReal = [nameOfButtons substringFromIndex:((i-1)*4+j)];
             NSString* name = [nameNotReal substringToIndex:1];
-            UIButton* button = [self createButtonWithName:name withX:(self.bounds.origin.x + j*self.bounds.size.width/4) withY:(self.bounds.origin.y + i*self.bounds.size.height/6) withWidth:(self.bounds.size.width/4) withHeight:(self.bounds.size.height/6) withSelector:@selector(buttonSelector:)];
+            UIButton* button = [self createButtonWithName:name withX:(self.bounds.origin.x + j*self.bounds.size.width/4) withY:(self.bounds.origin.y + i*self.bounds.size.height/6) withWidth:(self.bounds.size.width/4) withHeight:(self.bounds.size.height/6) withSelector:@selector(callButtonPressed:)];
             [self.viewsButtons addObject:button];
             [self addSubview:button];
         }
     }
     // SUBMIT button
-    UIButton* button = [self createButtonWithName:@"Submit" withX:self.bounds.origin.x withY:(self.bounds.origin.y + 5*self.bounds.size.height/6) withWidth: (self.bounds.size.width*3/8) withHeight:(self.bounds.size.height/6) withSelector:@selector(submitSelector:)];
+    UIButton* button = [self createButtonWithName:@"Submit" withX:self.bounds.origin.x withY:(self.bounds.origin.y + 5*self.bounds.size.height/6) withWidth: (self.bounds.size.width*3/8) withHeight:(self.bounds.size.height/6) withSelector:@selector(callSubmitPressed:)];
     [self.viewsButtons addObject:button];
     [self addSubview:button];
     
     // Clear button
-    UIButton* button1 = [self createButtonWithName:@"Clear" withX:(self.bounds.origin.x + 3*self.bounds.size.width/8) withY:(self.bounds.origin.y + 5*self.bounds.size.height/6) withWidth: (self.bounds.size.width*3/8)withHeight:(self.bounds.size.height/6) withSelector:@selector(clearSelector:)];
+    UIButton* button1 = [self createButtonWithName:@"Clear" withX:(self.bounds.origin.x + 3*self.bounds.size.width/8) withY:(self.bounds.origin.y + 5*self.bounds.size.height/6) withWidth: (self.bounds.size.width*3/8)withHeight:(self.bounds.size.height/6) withSelector:@selector(callClearPressed:)];
     [self.viewsButtons addObject:button1];
     [self addSubview:button1];
     
     // dot button
-    UIButton* button2 = [self createButtonWithName:@"." withX:(self.bounds.origin.x + 3*self.bounds.size.width/4) withY:(self.bounds.origin.y + 5*self.bounds.size.height/6) withWidth: (self.bounds.size.width/4)withHeight:(self.bounds.size.height/6) withSelector:@selector(buttonSelector:)];
+    UIButton* button2 = [self createButtonWithName:@"." withX:(self.bounds.origin.x + 3*self.bounds.size.width/4) withY:(self.bounds.origin.y + 5*self.bounds.size.height/6) withWidth: (self.bounds.size.width/4)withHeight:(self.bounds.size.height/6) withSelector:@selector(callButtonPressed:)];
     [self.viewsButtons addObject:button2];
     [self addSubview:button2];
 }
@@ -111,7 +109,6 @@
 
 - (void)layoutSubviews{
     #define delta 1
-    NSLog(@"GOT TO LAYOUTSUBVIEWS");
     NSUInteger countButttoms = [self.viewsButtons count];
     if (_label) {
         _label.frame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, self.bounds.size.height/6);
