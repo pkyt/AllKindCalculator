@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B7B1A3C0-7E34-4B49-9AFB-4EF761DB29FB</string>
+	<key>IDESourceControlProjectName</key>
+	<string>AllKindCalculator</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>23888312-DFD8-436A-AAD6-FB875BBFC600</key>
+		<string>https://github.com/pkyt/AllKindCalculator.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>AllKindCalculator.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>23888312-DFD8-436A-AAD6-FB875BBFC600</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/pkyt/AllKindCalculator.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>23888312-DFD8-436A-AAD6-FB875BBFC600</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>23888312-DFD8-436A-AAD6-FB875BBFC600</string>
+			<key>IDESourceControlWCCName</key>
+			<string>AllKindCalculator</string>
+		</dict>
+	</array>
+</dict>
+</plist>
