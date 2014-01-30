@@ -8,7 +8,7 @@
 
 #import "CalculatorViewController.h"
 #import "CalculatorBrain.h"
-#import "CalculatorMyView.h"
+#import "CalculatorView.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface CalculatorViewController ()<CalculatorMyViewFunctions>
