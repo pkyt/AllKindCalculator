@@ -11,14 +11,12 @@
 
 @interface CalculatorBrain()
 @property class CalculatorCpp * cpp;
-@property bool _exist; // if cpp was already created
 @property bool didWehaveSthWrittenToCpp; // does sth is saved in cpp class
 @end
 
 @implementation CalculatorBrain
 
 @synthesize didWehaveSthWrittenToCpp;
-@synthesize _exist;
 @synthesize cpp = _cpp;
 
 - (BOOL) didWeWriteSthToCCode{
@@ -26,8 +24,7 @@
 }
 
 - (void) pushChar:(char)operand{
-    if (!_exist){
-        _exist = true;
+    if (!_cpp){
         _cpp = new CalculatorCpp();
     }
     _cpp->addChar(operand);
@@ -36,7 +33,7 @@
 }
 - (NSString*) performOperation{
     
-    if(!_exist){
+    if(!_cpp){
         didWehaveSthWrittenToCpp = NO;
         return @"0";
     }
@@ -52,7 +49,7 @@
 }
 
 - (void) clearExpr{
-    if (_exist) {
+    if (_cpp) {
         _cpp->err = true; // it will automatically clear everything
         _cpp->errorMessage = "0"; // so that on display we get 0 not "ERROR"
     }

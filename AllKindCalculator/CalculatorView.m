@@ -75,29 +75,62 @@
 
 - (void)createButtons{
     NSString* nameOfButtons = @"789+456-123*(0)/";
+    // size of button are the same for everybody except clear and submit
+    float widthButton = self.bounds.size.width/4;
+    float heightButton = self.bounds.size.height/6;
     for (int i = 1; i < 5; i++){
         for (int j = 0; j < 4; j++) {
             NSString* nameNotReal = [nameOfButtons substringFromIndex:((i-1)*4+j)];
             NSString* name = [nameNotReal substringToIndex:1];
-            UIButton* button = [self createButtonWithName:name withX:(self.bounds.origin.x + j*self.bounds.size.width/4) withY:(self.bounds.origin.y + i*self.bounds.size.height/6) withWidth:(self.bounds.size.width/4) withHeight:(self.bounds.size.height/6) withSelector:@selector(callButtonPressed:)];
+            float xButton = self.bounds.origin.x + j*self.bounds.size.width/4;
+            float yButton = self.bounds.origin.y + i*self.bounds.size.height/6;
+            UIButton* button = [self createButtonWithName:name withX:xButton
+                                                    withY:yButton
+                                                withWidth:widthButton
+                                               withHeight:heightButton
+                                             withSelector:@selector(callButtonPressed:)];
             [self.viewsButtons addObject:button];
             [self addSubview:button];
         }
     }
     // SUBMIT button
-    UIButton* button = [self createButtonWithName:@"Submit" withX:self.bounds.origin.x withY:(self.bounds.origin.y + 5*self.bounds.size.height/6) withWidth: (self.bounds.size.width*3/8) withHeight:(self.bounds.size.height/6) withSelector:@selector(callSubmitPressed:)];
-    [self.viewsButtons addObject:button];
-    [self addSubview:button];
+    float xButtonSubmit = self.bounds.origin.x;
+    float yButtonSubmit = self.bounds.origin.y + 5*self.bounds.size.height/6;
+    float widthButtonSC = self.bounds.size.width*3/8;
+    float heightButtonSC = self.bounds.size.height/6;
+    UIButton* buttonSubmit = [self createButtonWithName:@"Submit"
+                                            withX:xButtonSubmit
+                                            withY:yButtonSubmit
+                                        withWidth:widthButtonSC
+                                       withHeight:heightButtonSC
+                                     withSelector:@selector(callSubmitPressed:)];
+    [self.viewsButtons addObject:buttonSubmit];
+    [self addSubview:buttonSubmit];
     
     // Clear button
-    UIButton* button1 = [self createButtonWithName:@"Clear" withX:(self.bounds.origin.x + 3*self.bounds.size.width/8) withY:(self.bounds.origin.y + 5*self.bounds.size.height/6) withWidth: (self.bounds.size.width*3/8)withHeight:(self.bounds.size.height/6) withSelector:@selector(callClearPressed:)];
-    [self.viewsButtons addObject:button1];
-    [self addSubview:button1];
+    float xButtonClear = self.bounds.origin.x + 3*self.bounds.size.width/8;
+    float yButtonClear = self.bounds.origin.y + 5*self.bounds.size.height/6;
+    // width and height are the same as previous one
+    UIButton* buttonClear = [self createButtonWithName:@"Clear"
+                                             withX:xButtonClear
+                                             withY:yButtonClear
+                                         withWidth: widthButtonSC
+                                        withHeight:heightButtonSC
+                                      withSelector:@selector(callClearPressed:)];
+    [self.viewsButtons addObject:buttonClear];
+    [self addSubview:buttonClear];
     
     // dot button
-    UIButton* button2 = [self createButtonWithName:@"." withX:(self.bounds.origin.x + 3*self.bounds.size.width/4) withY:(self.bounds.origin.y + 5*self.bounds.size.height/6) withWidth: (self.bounds.size.width/4)withHeight:(self.bounds.size.height/6) withSelector:@selector(callButtonPressed:)];
-    [self.viewsButtons addObject:button2];
-    [self addSubview:button2];
+    float xButtonDot = self.bounds.origin.x + 3*self.bounds.size.width/4;
+    float yButtonDot = self.bounds.origin.y + 5*self.bounds.size.height/6;
+    UIButton* buttonDot = [self createButtonWithName:@"."
+                                             withX:xButtonDot
+                                             withY:yButtonDot
+                                         withWidth:widthButton
+                                        withHeight:heightButton
+                                      withSelector:@selector(callButtonPressed:)];
+    [self.viewsButtons addObject:buttonDot];
+    [self addSubview:buttonDot];
 }
 
 - (void)createLabel{
